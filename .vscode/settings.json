@@ -1,0 +1,82 @@
+{
+  "editor.defaultFormatter": "octref.vetur",
+  "vetur.validation.template": false,
+  "vetur.format.defaultFormatter.css": "prettier",
+  "vetur.format.defaultFormatter.postcss": "prettier",
+  "vetur.format.defaultFormatter.scss": "prettier",
+  "vetur.format.defaultFormatter.less": "prettier",
+  "vetur.format.defaultFormatter.stylus": "stylus-supremacy",
+  "vetur.format.defaultFormatter.js": "prettier",
+  "vetur.format.defaultFormatter.ts": "prettier",
+  "vetur.format.defaultFormatter.html": "prettier",
+  // template typescript 提示，cpu不好请关掉
+  "vetur.experimental.templateInterpolationService": true,
+  // 保存时使用VSCode 自身格式化程序格式化
+  "editor.formatOnSave": true,
+  // "editor.formatOnPaste": true,
+  // "editor.formatOnType": true,
+  // 启用eslint
+  "eslint.options": {
+    "extensions": [".vue", ".js", ".jsx", ".ts", ".tsx", ".md", ".mdx",]
+  },
+  "eslint.validate": ["vue", "javascript", "javascriptreact", "typescript", "typescriptreact", "markdown", "mdx"],
+  // 保存时用eslint格式化
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  // 两者会在格式化js时冲突，所以需要关闭默认js格式化程序
+  "javascript.format.enable": false,
+  "html.format.enable": false,
+  "json.format.enable": false,
+  "typescript.format.enable": false,
+  // tailwindcss 补充提示
+  // "css.customData": [".vscode/css_custom_data.json"],
+  "css.validate": false,
+  // tsx文件prettier
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // see: https://vuejs.github.io/vetur/guide/snippet.html#customizable-scaffold-snippets
+  // "vetur.completion.scaffoldSnippetSources": {
+  //   "workspace": "💼", // Suffix workspace snippets with `💼`
+  //   "user": "(️User)", // Suffix workspace snippets with `(User)`
+  //   "vetur": "" // Disable Vetur's builtin scaffold snippets
+  // },
+  // 检查工地英语单词白名单（🤣）
+  "cSpell.words": [
+    "antd",
+    "camelize",
+    "clickoutside",
+    "combinator",
+    "comlist",
+    "commitlint",
+    "csstype",
+    "demi",
+    "ecmaversion",
+    "esno",
+    "globby",
+    "icegateway",
+    "loglevel",
+    "noresize",
+    "outfile",
+    "preversion",
+    "scripthost",
+    "segi",
+    "styl",
+    "stylelint",
+    "tampermonkey",
+    "Ttype",
+    "typegen",
+    "uhome",
+    "uhomecp",
+    "vetur",
+    "viewerjs",
+    "vnode",
+    "vuepress",
+    "vueuse",
+    "vuex",
+    "wangeditor"
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "name": "tampermonkey-example",
+  "author": {
+    "email": "2214962083@qq.com",
+    "name": "葬爱非主流小明",
+    "url": "https://space.bilibili.com/83540912"
+  },
+  "description": "油猴脚本工程化示例",
+  "scripts": {
+    "dev": "",
+    "build": "",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md",
+    "commit": "git-cz",
+    "lint:change": "lint-staged",
+    "lint:css": "stylelint --fix ./**/*.{html,vue,css,sass,scss} --cache --cache-location node_modules/.cache/stylelint/",
+    "lint:es": "eslint --fix --ext .jsx,.js,.vue,.ts,.tsx",
+    "lint:prettier": "prettier --write --loglevel warn \"./**/*.{js,jsx,ts,tsx,json,css,less,scss,vue,html,md,json}\"",
+    "prepare": "husky install",
+    "preversion": "npm run changelog"
+  },
+  "dependencies": {
+    "tslib": "2.3.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "13.1.0",
+    "@commitlint/config-conventional": "13.1.0",
+    "@types/eslint": "^7.28.0",
+    "@types/less": "^3.0.3",
+    "@types/prettier": "^2.3.2",
+    "@typescript-eslint/eslint-plugin": "^4.29.0",
+    "@typescript-eslint/parser": "^4.29.0",
+    "@vue/eslint-config-typescript": "7.0.0",
+    "commitizen": "4.2.4",
+    "conventional-changelog-cli": "2.1.1",
+    "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-html": "^6.1.2",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-markdown": "^2.2.0",
+    "eslint-plugin-mdx": "^1.15.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-vue": "^7.15.1",
+    "esno": "^0.9.1",
+    "globby": "11.0.4",
+    "husky": "7.0.1",
+    "lint-staged": "11.1.1",
+    "prettier": "^2.3.2",
+    "rimraf": "^3.0.2",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-prettier": "^1.2.0",
+    "typescript": "4.3.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog",
+      "types": {
+        "chore": {
+          "description": "构建过程或辅助工具更改和库的更改,不影响源文件、测试用例的其他操作",
+          "emoji": "🤖",
+          "value": "chore"
+        },
+        "ci": {
+          "description": "CI 相关变化,修改了 CI 配置、脚本",
+          "emoji": "🎡",
+          "value": "ci"
+        },
+        "docs": {
+          "description": "文档的变更",
+          "emoji": "✏️",
+          "value": "docs"
+        },
+        "feat": {
+          "description": "新增产品功能",
+          "emoji": "🎸",
+          "value": "feat"
+        },
+        "build": {
+          "description": "构建流程、外部依赖变更，比如升级 npm 包、修改 webpack 配置",
+          "emoji": "🏗️",
+          "value": "build"
+        },
+        "fix": {
+          "description": "修复 bug",
+          "emoji": "🐛",
+          "value": "fix"
+        },
+        "perf": {
+          "description": "提高性能的代码更改",
+          "emoji": "⚡️",
+          "value": "perf"
+        },
+        "refactor": {
+          "description": "重构代码。不包括 bug 修复、功能新增",
+          "emoji": "💡",
+          "value": "refactor"
+        },
+        "revert": {
+          "description": "回滚 commit",
+          "emoji": "🔙",
+          "value": "revert"
+        },
+        "style": {
+          "description": "不改变代码功能的变动(如删除空格、格式化、去掉末尾分号等)",
+          "emoji": "💄",
+          "value": "style"
+        },
+        "test": {
+          "description": " 添加、修改测试用例",
+          "emoji": "💍",
+          "value": "test"
+        }
+      }
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "package.json": [
+      "prettier --write"
+    ],
+    "*.vue": [
+      "eslint --fix",
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.{scss,less,css,styl,html}": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "crate my vue props file": {
+    "prefix": "vprops",
+    "body": [
+      "import {bool, oneOf, string} from '@segi-ant/utils/prop-types'",
+      "import {GetPropTypes} from '@segi-ant/utils/types-help'",
+      "",
+      "export const $0Props = () => ({",
+      "  name: string().def(''),",
+      "})",
+      "",
+      "export type $0Props = GetPropTypes<typeof $0Props>",
+      ""
+    ],
+    "description": "crate my vue props file"
+  }
+}

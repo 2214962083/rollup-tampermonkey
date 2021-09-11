@@ -1,0 +1,10 @@
+# 发布npm包时忽略的文件
+# 忽略目录
+examples/
+packages/
+public/
+.DS_Store
+node_modules/
+.husky/
+.vscode/
+scripts/

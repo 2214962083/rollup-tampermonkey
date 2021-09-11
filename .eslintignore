@@ -1,0 +1,11 @@
+node_modules/
+**/*.spec.*
+**/style/
+*.html
+es/
+**/lib/
+**/dist/
+**/lib-types/
+_site/
+dist/
+CHANGELOG.md
