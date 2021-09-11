@@ -6,3 +6,5 @@ _site/
 dist/
 **/node_modules/*
 **/segi-ant-theme.less
+.rollup.cache/
+tsconfig.tsbuildinfo

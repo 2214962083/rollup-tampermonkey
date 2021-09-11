@@ -29,3 +29,5 @@ node_modules/
 .gitmodules
 *.png
 v2-doc/
+.rollup.cache/
+tsconfig.tsbuildinfo

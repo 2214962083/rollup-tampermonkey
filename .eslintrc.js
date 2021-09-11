@@ -27,7 +27,7 @@ module.exports = /** @type { import('eslint').Linter.Config } */ ({
     'eslint:recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
-    'plugin:vue/recommended',
+    'plugin:vue/vue3-recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',

@@ -2,7 +2,7 @@
 . "$(dirname "$0")/_/husky.sh"
 
 # 校验文件夹、文件命名规范
-npm run lint:dir
+# npm run lint:dir
 
 # 校验 git 缓存区的文件代码规范，并美化
 npx --no-install lint-staged

@@ -5,6 +5,7 @@ node_modules
 **/lib-types
 .history
 **/segi-ant-theme.less
+.rollup.cache
 
 # local env files
 .env.local
@@ -22,5 +23,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+tsconfig.tsbuildinfo
 
 .vercel

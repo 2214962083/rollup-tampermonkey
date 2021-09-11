@@ -8,3 +8,5 @@ node_modules/
 .husky/
 .vscode/
 scripts/
+.rollup.cache/
+tsconfig.tsbuildinfo

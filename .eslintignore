@@ -8,4 +8,6 @@ es/
 **/lib-types/
 _site/
 dist/
+**/.rollup.cache/
 CHANGELOG.md
+tsconfig.tsbuildinfo
