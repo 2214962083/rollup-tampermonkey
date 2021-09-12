@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ msg }}</h1>
+    <h1 class="title">{{ msg }}</h1>
     <button @click="handleClick">点击切换</button>
   </div>
 </template>
@@ -13,15 +13,9 @@ export default defineComponent({
   setup() {
     const msg = ref('hello')
     const handleClick = () => {
-      msg.value = 'hello, world8'
+      msg.value = 'hello, world'
     }
     return {msg, handleClick}
   }
 })
 </script>
-<style lang="less" scoped>
-.my-scope {
-  transform: translate(7px, 8px);
-  margin: 20px 20px 20px 20px;
-}
-</style>

@@ -1,34 +1,36 @@
 import path from 'path'
 import chalk from 'chalk'
 import {defineConfig, ModuleFormat, OutputOptions, Plugin} from 'rollup'
+import {loadEnvFiles} from './scripts/load-env'
 
 // rollup 插件
 import aliasPlugin from '@rollup/plugin-alias' // 路径别名
 import nodeResolvePlugin from '@rollup/plugin-node-resolve' // em...忘记了
 import jsonPlugin from '@rollup/plugin-json' // json 转 object
 import urlPlugin from '@rollup/plugin-url' // 文件转 url 或 base64
-import typescriptPlugin from '@rollup/plugin-typescript' // ts 编译
-import replacePlugin from '@rollup/plugin-replace' // 替换变量
-import dotenvPlugin from 'rollup-plugin-dotenv' // dotenv
 import vuePlugin from 'rollup-plugin-vue' // vue
+import esbuildPlugin from 'rollup-plugin-esbuild' // esbuild 打包 ts 更快
+import dotenvPlugin from 'rollup-plugin-dotenv' // dotenv
 import postcssPlugin from 'rollup-plugin-postcss' // postcss
 import commonjsPlugin from '@rollup/plugin-commonjs' // 支持引入 cjs
 import babelPlugin from '@rollup/plugin-babel' // babel
 import {terser as terserPlugin} from 'rollup-plugin-terser' // 压缩 js 代码
 import serverPlugin from 'rollup-plugin-serve' // 开启一个 serve
-// import dtsPlugin from 'rollup-plugin-dts' // 生成 .d.ts 文件
 
 // postcss 插件
 import cssnano from 'cssnano' // 减少无用 css
 import autoprefixer from 'autoprefixer' // 补充 css 前缀
 import postcssUrl from 'postcss-url' // css 图片打包支持
 
+// 项目根路径
+const appPath = __dirname
+
 // 环境
 const env = process.env.NODE_ENV
 console.log(chalk.green('当前环境: ' + env))
 
-// 项目根路径
-const appPath = __dirname
+// 加载 dotenv
+loadEnvFiles(appPath)
 
 // 从项目根路径计算 path
 const _resolve = (filePath: string) => path.resolve(appPath, filePath)
@@ -47,6 +49,13 @@ const extensions = ['.vue', '.jsx', '.js', '.tsx', '.ts']
 
 // 是否生成 sourcemap
 const sourcemap = true
+
+// dotenv 等环境变量替换
+const envReplace = Object.fromEntries(
+  Object.entries(process.env)
+    .filter(([key]) => /^[a-zA-Z\\$_][a-zA-Z\\$_0-9]*$/.test(key))
+    .map(([key, value]) => ['process.env.' + key, JSON.stringify(value)])
+)
 
 // 补充插件
 const plugins: Plugin[] = []
@@ -80,6 +89,7 @@ export default defineConfig({
     include: _posixResolve('./src/**')
   },
   plugins: [
+    // 别名路径
     aliasPlugin({
       entries: [
         {
@@ -89,25 +99,43 @@ export default defineConfig({
       ]
     }),
     nodeResolvePlugin({extensions}),
+
+    // json 解析为 object
     jsonPlugin(),
+
+    // 引入其他文件为 base64
     urlPlugin({
       include: ['**/*.svg', '**/*.png', '**/*.jp(e)?g', '**/*.gif', '**/*.webp'],
       limit: Infinity
     }),
-    typescriptPlugin(),
-    replacePlugin({
-      preventAssignment: true,
-      values: {
-        'process.env.NODE_ENV': JSON.stringify(env)
-      }
-    }),
-    dotenvPlugin({envKey: env}),
+
+    // vue sfc 解析
     vuePlugin(),
+
+    // TODO: 这个 rollup 插件不支持设置 esbuild 的 charset，想个办法
+    esbuildPlugin({
+      include: /\.[jt]sx?$/,
+      exclude: /node_modules/,
+      sourceMap: sourcemap,
+      minify: false,
+      define: {
+        ...envReplace,
+        'process.env.NODE_ENV': JSON.stringify(env)
+      },
+      tsconfig: _resolve('./tsconfig.json')
+    }),
+
+    // 环境变量替换
+    dotenvPlugin({cwd: appPath, envKey: env}),
+
+    // postcss 处理
     postcssPlugin({
       plugins: [cssnano, autoprefixer, postcssUrl({url: 'inline'})],
       use: ['less'],
       extensions: ['.css', '.less']
     }),
+
+    // cjs 模块导入支持
     commonjsPlugin(),
 
     // TODO: babel 开启后，tampermonkey 好像内部出错了，以后再排查
@@ -116,7 +144,8 @@ export default defineConfig({
     //   babelHelpers: 'bundled',
     //   extensions,
     //   configFile: _resolve('./babel.config.js'),
-    //   exclude: _posixResolve('./node_modules/**')
+    //   exclude: /node_modules/
+    //   // exclude: _posixResolve('./node_modules/**')
     // }),
 
     ...plugins
